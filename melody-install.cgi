@@ -18,7 +18,7 @@
 #
 =head1 NAME
 
-mt-install.cgi - Simple, fast and bullet proof Open Melody installer.
+melody-install.cgi - Simple, fast and bullet proof Open Melody installer.
 
 =head1 DESCRIPTION
 
@@ -745,7 +745,7 @@ $(document).ready(function(){
 	my $findroot;
 	$findroot = $ENV{DOCUMENT_ROOT};
 	if (!$findroot) { $findroot = getcwd(); };
-#    print q{<form action="mt-install.cgi">};
+#    print q{<form action="melody-install.cgi">};
     print q{  <h2>Does this look right to you?</h2>};
     print q{  <ul class="paths">};
 
@@ -840,7 +840,7 @@ sub cgibin_can_serve_static_files {
     write_test_file();
     my $content;
     my $url = get_current_url();
-    $url =~ s/mt-install.cgi//;
+    $url =~ s/melody-install.cgi//;
     $url .= TEST_FILE;
     my $res = _getfile($url);
     if ($res->is_success) {
@@ -1073,8 +1073,8 @@ function init_setup_help(link,options) {
 }
 function check_prereqs() {
   pages.unshift( $('#upgrade').html() );
-  $('#upgrade').html('<img src="http://localhost/~breese/mt/mt-static/images/indicator.gif" />');
-  $.post('mt-install.cgi', 
+  $('#upgrade').html('<img src="http://cloud.richardbenson.co.uk/cgi-bin/mt/mt-static/images/indicator.gif" />');
+  $.post('melody-install.cgi', 
          { 
            'json'    : 'check_prereqs',
            'cgibin'  : cgibin_path,
@@ -1096,12 +1096,14 @@ function check_prereqs() {
 }
 function begin() {
   pages.unshift( $('#upgrade').html() );
-  $('#upgrade').html('<img src="http://localhost/~breese/mt/mt-static/images/indicator.gif" />');
-  $.post('mt-install.cgi', 
+  $('#upgrade').html('<img src="http://cloud.richardbenson.co.uk/cgi-bin/mt/mt-static/images/indicator.gif" />');
+  $.post('melody-install.cgi', 
          { 
            'json'    : 'find_installs',
            'cgibin'  : cgibin_path,
-           'docroot' : docroot_path 
+           'docroot' : docroot_path, 
+           'cgibinurl'  : cgibin_url,
+           'baseurl' : docroot_url
          },
          function(data){
            $('#back').attr('disabled',false);
@@ -1135,7 +1137,7 @@ body {
   }
 #container-inner{
   border: 1px solid #cfdde5;
-  background-image: url('http://localhost/~breese/mt/mt-static/images/chromeless/chromeless_bg_b.png');
+  background-image: url('http://cloud.richardbenson.co.uk/cgi-bin/mt/mt-static/images/chromeless/chromeless_bg_b.png');
   background-repeat: repeat-x;
   background-position: bottom center; 
   background-color: white;
@@ -1213,15 +1215,15 @@ input#mtstatic {
       font-size: 0.1em;
       line-height: 0;
 }
-.msg-success{background-image:url('http://localhost/~breese/mt/mt-static/images/icon_success.png');}
-.msg-error{background-image:url('http://localhost/~breese/mt/mt-static/images/icon_error.png');}
-.msg-info{background-image:url('http://localhost/~breese/mt/mt-static/images/icon_info.gif');}
-.msg-alert{background-image:url('http://localhost/~breese/mt/mt-static/images/icon_alert.png');}
-.msg-publishing{background-image:url('http://localhost/~breese/mt/mt-static/images/ani-rebuild.gif');}
-.msg a.close-me{background:transparent url('http://localhost/~breese/mt/mt-static/images/icon_close.png') no-repeat scroll 3px 4px;}
+.msg-success{background-image:url('http://cloud.richardbenson.co.uk/cgi-bin/mt/mt-static/images/icon_success.png');}
+.msg-error{background-image:url('http://cloud.richardbenson.co.uk/cgi-bin/mt/mt-static/images/icon_error.png');}
+.msg-info{background-image:url('http://cloud.richardbenson.co.uk/cgi-bin/mt/mt-static/images/icon_info.gif');}
+.msg-alert{background-image:url('http://cloud.richardbenson.co.uk/cgi-bin/mt/mt-static/images/icon_alert.png');}
+.msg-publishing{background-image:url('http://cloud.richardbenson.co.uk/cgi-bin/mt/mt-static/images/ani-rebuild.gif');}
+.msg a.close-me{background:transparent url('http://cloud.richardbenson.co.uk/cgi-bin/mt/mt-static/images/icon_close.png') no-repeat scroll 3px 4px;}
 
-#nav .step{background:url('http://localhost/~breese/mt/mt-static/images/chromeless/nav_off.png');}
-#nav .step_active{background:url('http://localhost/~breese/mt/mt-static/images/chromeless/nav_on.png');}
+#nav .step{background:url('http://cloud.richardbenson.co.uk/cgi-bin/mt/mt-static/images/chromeless/nav_off.png');}
+#nav .step_active{background:url('http://cloud.richardbenson.co.uk/cgi-bin/mt/mt-static/images/chromeless/nav_on.png');}
 
 
 /* Begin Simple CSS */
