@@ -144,97 +144,100 @@ my $DBUSER    = $cgi->param('dbuser');
 my $DBPASS    = $cgi->param('dbpass');
 my $DBHOST    = $cgi->param('dbhost');
 
+my $WEBSERVER = $ENV{SERVER_SOFTWARE};
+
 my $PREREQS = {
     'CGI' => {
-	version => 0,
-	required => 1,
-	description => 'CGI is required for all Movable Type application functionality.',
+		version => 0,
+		required => 1,
+		description => 'CGI is required for all Movable Type application functionality.',
     },
     'Image::Size' => {
-	version => 0,
-	required => 1,
-	description => 'Image::Size is required for file uploads (to determine the size of uploaded images in many different formats).',
+		version => 0,
+		required => 1,
+		description => 'Image::Size is required for file uploads (to determine the size of uploaded images in many different formats).',
+		short => 'Image Upload',
     },
     'File::Spec' => {
-	version => 0.8,
-	required => 1,
-	description => 'File::Spec is required for path manipulation across operating systems.',
+		version => 0.8,
+		required => 1,
+		description => 'File::Spec is required for path manipulation across operating systems.',
     },
     'CGI::Cookie' => {
-	version => 0,
-	required => 1,
-	description => 'CGI::Cookie is required for cookie authentication.',
+		version => 0,
+		required => 1,
+		description => 'CGI::Cookie is required for cookie authentication.',
     },
     'DBI' => {
-	version => 1.21, 
-	required => 1,
-	description => 'DBI is required to store data in database.',
+		version => 1.21, 
+		required => 1,
+		description => 'DBI is required to store data in database.',
     },
     'DBD::mysql' => {
-	version => 0,
-	required => 1,
-	description => 'DBI and DBD::mysql are required if you want to use the MySQL database backend.',
+		version => 0,
+		required => 1,
+		description => 'DBI and DBD::mysql are required if you want to use the MySQL database backend.',
     },
     'HTML::Entities' => {
-	version => 0,
-	required => 0,
-	description => 'HTML::Entities is needed to encode some characters, but this feature can be turned off using the NoHTMLEntities option in the configuration file.',
-	short => 'HTML Encoding',
+		version => 0,
+		required => 0,
+		description => 'HTML::Entities is needed to encode some characters, but this feature can be turned off using the NoHTMLEntities option in the configuration file.',
+		short => 'HTML Encoding',
     },
     'LWP::UserAgent' => {
-	version => 0,
-	required => 0,
-	description => 'LWP::UserAgent is optional; It is needed if you wish to use the TrackBack system, the weblogs.com ping, or the MT Recently Updated ping.',
-	short => 'TrackBack',
+		version => 0,
+		required => 0,
+		description => 'LWP::UserAgent is optional; It is needed if you wish to use the TrackBack system, the weblogs.com ping, or the MT Recently Updated ping.',
+		short => 'TrackBack',
     },
     'HTML::Parser' => {
-	version => 0, 
-	required => 0,
-	description => 'HTML::Parser is optional; It is needed if you wish to use the TrackBack system, the weblogs.com ping, or the MT Recently Updated ping.',
-	short => 'TrackBack',
+		version => 0, 
+		required => 0,
+		description => 'HTML::Parser is optional; It is needed if you wish to use the TrackBack system, the weblogs.com ping, or the MT Recently Updated ping.',
+		short => 'TrackBack',
     },
     'SOAP::Lite' => {
-	version => 0.50,
-	required => 0,
-	description => 'SOAP::Lite is optional; It is needed if you wish to use the MT XML-RPC server implementation.',
-	short => 'XML-RPC',
+		version => 0.50,
+		required => 0,
+		description => 'SOAP::Lite is optional; It is needed if you wish to use the MT XML-RPC server implementation.',
+		short => 'XML-RPC',
     },
     'File::Temp' => {
-	version => 0,
-	required => 0,
-	description => 'File::Temp is optional; It is needed if you would like to be able to overwrite existing files when you upload.',
-	short => "Upload file overwrite",
+		version => 0,
+		required => 0,
+		description => 'File::Temp is optional; It is needed if you would like to be able to overwrite existing files when you upload.',
+		short => "Upload file overwrite",
     },
     'Scalar::Util' => {
-	version => 0,
-	required => 1, 
-	description => 'Scalar::Util is optional; It is needed if you want to use the Publish Queue feature.',
-	short => 'Publish Queue',
+		version => 0,
+		required => 1, 
+		description => 'Scalar::Util is optional; It is needed if you want to use the Publish Queue feature.',
+		short => 'Publish Queue',
     },
     'List::Util' => {
-	version => 0,
-	required => 1,
-	description => 'List::Util is optional; It is needed if you want to use the Publish Queue feature.',
-	short => 'Publish Queue',
+		version => 0,
+		required => 1,
+		description => 'List::Util is optional; It is needed if you want to use the Publish Queue feature.',
+		short => 'Publish Queue',
     },
     'Image::Magick' => {
-	version => 0,
-	required => 0,
-	description => 'Image::Magick is optional; It is needed if you would like to be able to create thumbnails of uploaded images.',
-	short => 'Image manipulation, userpics and thumbnails',
+		version => 0,
+		required => 0,
+		description => 'Image::Magick is optional; It is needed if you would like to be able to create thumbnails of uploaded images.',
+		short => 'Image manipulation, userpics and thumbnails',
     },
     'Storable' => {
-	version => 0,
-	required => 0,
-	description => 'Storable is optional; it is required by certain MT plugins available from third parties.',
-	short => "Some plugins",
+		version => 0,
+		required => 0,
+		description => 'Storable is optional; it is required by certain MT plugins available from third parties.',
+		short => "Some plugins",
     },
-    'Crypt::DSA' => {
-	version => 0, 
-	required => 0,
-	description => 'Crypt::DSA is optional; if it is installed, comment registration sign-ins will be accelerated.',
-	short => 'Feature: High performant comment authentication',
-    },
+    #'Crypt::DSA' => {
+	#	version => 0, 
+	#	required => 0,
+	#	description => 'Crypt::DSA is optional; if it is installed, comment registration sign-ins will be accelerated.',
+	#	short => 'Feature: High performant comment authentication',
+    #},
 #    'MIME::Base64', 0, 0, 'MIME::Base64 is required in order to enable comment registration.','Comment Registration',
 #    'XML::Atom', 0, 0, 'XML::Atom is required in order to use the Atom API.','Atom Publishing Protocol',
 #    'Cache::Memcached', 0, 0, 'Cache::Memcached and memcached server/daemon is required in order to use memcached as caching mechanism used by Movable Type.','Memcache',
@@ -249,10 +252,10 @@ my $PREREQS = {
 #    'Digest::MD5', 0, 0, 'This module is used by the Markdown text filter.','Markdown',
 #    'Text::Balanced', 0, 0, 'This module is required in mt-search.cgi if you are running Movable Type on Perl older than Perl 5.8.','Search',
     'FCGI' => {
-	version => 0, 
-	required => 0,
-	description => 'FCGI is needed in order to run under FastCGI.',
-	short => 'FastCGI',
+		version => 0, 
+		required => 0,
+		description => 'FCGI is needed in order to run under FastCGI.',
+		short => 'FastCGI',
     },
 };
 
@@ -757,6 +760,7 @@ $(document).ready(function(){
     print q{    <li class="pkg"><label>Path to cgi-bin: <input type="text" id="cgibin" name="cgibin" value="}.getcwd.q{" size="40" /></label></li>};
 
     print q{  </ul>};
+	print q{  <p>Installing on: }.$WEBSERVER.q{</p>};
     print q{  <p><button id="begin">Begin</button></p>};
 #    print q{</form>};
 }
@@ -865,6 +869,7 @@ sub prereq_html {
     my $can_continue = 1;
     foreach my $mod (sort keys %$results) {
 	if (!$results->{$mod}->{ok}) {
+		#debug($mod);
 	    $html .= qq{<li><code>$mod</code> is not installed, disabling the following feature: } . $PREREQS->{$mod}->{short} . qq{ <a href="#" class="fixme" title="$mod">Fix me</a></li>};
 	    if ($results->{$mod}->{required} == 1) { $can_continue = 0; }
         }
