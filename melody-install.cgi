@@ -1115,9 +1115,9 @@ function begin() {
              toggle_drawer($(this).attr('id'),html); 
            });
            $('#next-checkprereq').click(function(){
-               install_type = $('ul.install_opt input[@checked=true]').val();
-               alert('install type: ' + install_type);
-	       check_prereqs();
+                install_type = $('input[name=type]:checked').val();
+                alert('install type: ' + install_type);
+				check_prereqs();
            });
          },
          "json");
