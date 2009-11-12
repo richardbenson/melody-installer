@@ -477,16 +477,17 @@ print "ok";
     close CGI;
     chmod 0775, $dir;
     chmod 0775, $cgi;
-    my $url = $BASEURL . File::Spec->catfile($tmpdir,'test.cgi');
+    my $url = $BASEURL . '/' . $tmpdir . '/test.cgi';
+	#debug($url);
     my $res = _getfile($url);
     if ($res->is_success) {
-	if ($res->content ne 'ok') {
-#	    debug("Contents of test file are incorrect: ".$res->content);
-	    return 0;
-	} 
+		if ($res->content ne 'ok') {
+			#debug("Contents of test file are incorrect: ".$res->content);
+			return 0;
+		} 
     } else {
-#	debug("Could not get test file.");
-	return 0;
+		#debug("Could not get test file.");
+		return 0;
     }
     rmtree($dir);
     return 1;
