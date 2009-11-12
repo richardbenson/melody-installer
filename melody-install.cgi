@@ -571,9 +571,9 @@ $(document).ready(function(){
 	$html .= q{  </ul>};
 	
 	$html .= q{  <ul class="urls">};
-	$html .= qq{    <li id="url-mthome" class="pkg wrap url"><label for="mthome">URL to Open Melody Admin:</label><input type="text" id="mthome" name="mthome" size="40" value="" /></li>};
+	$html .= qq{    <li id="url-mthome" class="pkg wrap url"><label for="mthome">URL to Open Melody Admin:</label><input type="text" id="mthome" name="mthome" size="40" value="" readonly="true" onclick="this.select()" /></li>};
 	
-	$html .= qq{    <li id="url-static" class="pkg wrap url" style="display: none"><label for="mtstatic">URL to Static Content:</label><input type="text" id="mtstatic" name="mtstatic" size="40" value="" /></li>};
+	$html .= qq{    <li id="url-static" class="pkg wrap url" style="display: none"><label for="mtstatic">URL to Static Content:</label><input type="text" id="mtstatic" name="mtstatic" size="40" value="" readonly="true" onclick="this.select()" /></li>};
 	$html .= q{  </ul>};
 	
 	$html .= q{  <p><button id="next-checkprereq">Next</button></p>};
