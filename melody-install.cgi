@@ -742,12 +742,15 @@ $(document).ready(function(){
 });
 </script>
     };
+	my $findroot;
+	$findroot = $ENV{DOCUMENT_ROOT};
+	if (!$findroot) { $findroot = getcwd(); };
 #    print q{<form action="mt-install.cgi">};
     print q{  <h2>Does this look right to you?</h2>};
     print q{  <ul class="paths">};
 
     print q{    <li class="pkg"><label>Homepage URL: <input type="text" id="baseurl" name="baseurl" value="}."http" . ($cgi->https() ? 's' : '') . "://" .$cgi->server_name().q{" size="40" /></label></li>};
-    print q{    <li class="pkg"><label>Path to Document Root: <input type="text" id="docroot" name="docroot" value="}.$ENV{DOCUMENT_ROOT}.q{" size="40" /></label></li>};
+    print q{    <li class="pkg"><label>Path to Document Root: <input type="text" id="docroot" name="docroot" value="}.$findroot.q{" size="40" /></label></li>};
 
     print q{    <li class="pkg"><label>URL to cgi-bin: <input type="text" id="cgibinurl" name="cgibinurl" value="http}.($cgi->https() ? 's' : '') . "://" .$cgi->server_name().q{/cgi-bin/" size="40" /></label></li>};
     print q{    <li class="pkg"><label>Path to cgi-bin: <input type="text" id="cgibin" name="cgibin" value="}.getcwd.q{" size="40" /></label></li>};
@@ -947,10 +950,8 @@ sub print_header {
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Open Melody Installer</title>
-    <script type="text/javascript" src="http://localhost/~breese/mt-byrne/mt-static/jquery/jquery.js"></script>
-<!--
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
--->
+
 EOH
     $html .= q{
     <script type="text/javascript">
