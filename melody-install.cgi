@@ -66,6 +66,7 @@ unzipped into the designated directory. If such an ability does not
 exist, attempt to download and install Archive::Extract. If that  
 fails, then download each file independently and put it in proper place.
 
+
 7. Download manifest from server. Manifest will include CRC values.  
 Perform CRC check on ALL installed files. Error on any failure.  
 Attempt to re-download any missing files.
